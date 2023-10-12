@@ -1,3 +1,5 @@
+import java.util.StringJoiner
+
 fun main(args: Array<String>) {
     val age = 5
 //    if ((age >= 12) && (age <= 100))
@@ -30,7 +32,20 @@ fun main(args: Array<String>) {
 
 //    println(age.isPositive())
 
-    println(age.isPrime())
+//    println(age.isPrime())
+
+    val list = listOf<Int>()
+    val string = "fdfd"
+//    myWith(string) {
+//        println(this.toUpperCase())
+//        println(toUpperCase())
+//    }
+
+    val obj = mutableMapOf<String, String>("dsfsd" to "1", "fdsfs" to "2")
+    myWith(obj) {
+        println(this.keys)
+        values
+    }
 }
 
 //fun isAgeValid(age:Int) = age in 6..100
@@ -49,3 +64,23 @@ fun Int.isPrime() : Boolean {
 }
 
 fun Any.isYou() = 0
+
+//fun myWith(list: List<Int>, operation: List<Int>.() -> Unit) {
+//    list.operation()
+//}
+//
+//fun myWith(string: String, operation: String.() -> Unit) {
+//    string.operation()
+//}
+
+//fun myWith(obj: Any, operation: Any.() -> Unit) {
+//    obj.operation()
+//}
+
+//inline fun<T> myWith(obj: T, operation: T.() -> Unit) {
+//    obj.operation()
+//}
+
+inline fun<T, R> myWith(obj: T, operation: T.() -> R) : R {
+    return obj.operation()
+}

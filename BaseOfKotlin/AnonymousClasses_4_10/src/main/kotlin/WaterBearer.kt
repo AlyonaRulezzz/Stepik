@@ -1,0 +1,3 @@
+interface WaterBearer {
+    fun bringWater()
+}

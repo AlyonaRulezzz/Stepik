@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Datum (
     @Expose
-    @SerializedName("Id")
+//    @SerializedName("Id")
+    @SerializedName("CoinInfo")
     val coinInfo: CoinInfo? = null
 )

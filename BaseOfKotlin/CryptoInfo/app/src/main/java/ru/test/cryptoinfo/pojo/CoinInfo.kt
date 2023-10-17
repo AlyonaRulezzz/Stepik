@@ -7,19 +7,20 @@ import java.util.*
 
 
 data class CoinInfo(
-    @Expose
-    @SerializedName("Id")
-    val id: String? = null,
+//    @Expose
+//    @SerializedName("Id")
+//    val id: String? = null,
 
     @Expose
     @SerializedName("Name")
-    val name: String? = null,
-
-    @Expose
-    @SerializedName("FullName")
-    val fullName: String? = null,
-
-    @Expose
-    @SerializedName("ImageUrl")
-    val imageUrl: String? = null,
+    val name: String? = null
+//    ,
+//
+//    @Expose
+//    @SerializedName("FullName")
+//    val fullName: String? = null,
+//
+//    @Expose
+//    @SerializedName("ImageUrl")
+//    val imageUrl: String? = null,
 )

@@ -1,8 +1,11 @@
 package ru.test.cryptoinfo.pojo
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "full_price_list")
 data class CoinPriceInfo(
     @Expose
     @SerializedName("TYPE")
@@ -12,6 +15,7 @@ data class CoinPriceInfo(
     @SerializedName("MARKET")
     val market: String? = null,
 
+    @PrimaryKey
     @Expose
     @SerializedName("FROMSYMBOL")
     val fromSymbol: String? = null,

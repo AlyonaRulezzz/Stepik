@@ -1,5 +1,6 @@
 package ru.test.cryptoinfo.pojo
 
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
@@ -18,7 +19,8 @@ data class CoinPriceInfo(
     @PrimaryKey
     @Expose
     @SerializedName("FROMSYMBOL")
-    val fromSymbol: String? = null,
+//    val fromSymbol: String? = null,
+    val fromSymbol: String = "",
 
     @Expose
     @SerializedName("TOSYMBOL")

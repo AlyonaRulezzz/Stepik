@@ -86,4 +86,8 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    //noinspection DuplicatePlatformClasses
+    implementation 'org.json:json:20211205'
+
 }

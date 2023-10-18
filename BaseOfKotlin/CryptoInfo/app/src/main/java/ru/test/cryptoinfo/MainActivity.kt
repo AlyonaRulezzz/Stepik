@@ -3,37 +3,21 @@ package ru.test.cryptoinfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-
-import io.reactivex.schedulers.Schedulers
-import retrofit2.http.GET
-import ru.test.cryptoinfo.api.ApiFactory
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
 
-    private val compositeDisposable = CompositeDisposable()
+    private lateinit var viewModel: CoinViewModel
+//    val viewModel by android.arch.lifecycle.ViewModel<CoinViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val disposable = ApiFactory.apiService.getTopCoinsInfo()
-//        val disposable = ApiFactory.apiService.getFullPriceList( fSyms = "BTC,ETH,EOS")
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe (
-                {
-                    Log.d("TEST_OF_LOADING_DATA", it.toString())
-                }, {
-                Log.d("TEST_OF_LOADING_DATA", it.message!!)
-                })
-        compositeDisposable.add(disposable)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
+        viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
+        viewModel.loadData()
+        viewModel.priceList.observe(this, Observer {
+            Log.d("TEST_OF_LOADING_DATA", "Success in activity: $it")
+        })
     }
 }

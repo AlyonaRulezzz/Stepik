@@ -1,0 +1,61 @@
+package ru.test.cryptoinfo
+
+import android.app.Application
+import android.util.Log
+import androidx.lifecycle.AndroidViewModel
+import com.google.gson.Gson
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import ru.test.cryptoinfo.api.ApiFactory
+import ru.test.cryptoinfo.database.AppDatabase
+import ru.test.cryptoinfo.pojo.CoinPriceInfo
+import ru.test.cryptoinfo.pojo.CoinPriceInfoRowData
+
+class CoinViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val db = AppDatabase.getInstance(application)
+    private val compositeDisposable = CompositeDisposable()
+
+    val priceList = db.coinPriceInfoDao().getPriceList()
+
+    fun loadData() {
+        val disposable = ApiFactory.apiService.getTopCoinsInfo(limit = 50)
+//        val disposable = ApiFactory.apiService.getFullPriceList( fSyms = "BTC,ETH,EOS")
+            .map { it.data?.map { it.coinInfo?.name }?.joinToString(", ") }
+            .flatMap { ApiFactory.apiService.getFullPriceList(fSyms = it) }
+            .map { getPriceListFromRawData(it) }
+            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())  //  теперь нам не нужно переключаться на главный поток, всё делаем в побочном
+            .subscribe(
+                {
+                    db.coinPriceInfoDao().insertPriceList(it)
+                    Log.d("TEST_OF_LOADING_DATA", "Success: $it")
+                }, {
+                    Log.d("TEST_OF_LOADING_DATA", "Failure: " + it.message!!)
+                })
+        compositeDisposable.add(disposable)
+    }
+
+    private fun getPriceListFromRawData(
+        coinPriceInfoRowData: CoinPriceInfoRowData
+    )    : List<CoinPriceInfo> {
+        val result = ArrayList<CoinPriceInfo>()
+        val jsonObject = coinPriceInfoRowData.coinPriceInfoJsonObject ?: return result
+        val coinKeySet = jsonObject.entrySet().map { it.key }.toMutableSet()
+        for (coinKey in coinKeySet) {
+            val currencyJson = jsonObject.getAsJsonObject(coinKey)
+            val currencyKeySet = currencyJson.entrySet().map { it.key }.toMutableSet()
+            for (currencyKey in currencyKeySet) {
+                val priceInfo = Gson().fromJson(
+                    currencyJson.getAsJsonObject(currencyKey), CoinPriceInfo::class.java)
+                result.add(priceInfo)
+            }
+        }
+        return result
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
+    }
+}

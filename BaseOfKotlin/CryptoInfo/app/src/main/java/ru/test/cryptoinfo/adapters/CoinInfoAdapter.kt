@@ -11,7 +11,7 @@ import ru.test.cryptoinfo.pojo.CoinPriceInfo
 
 class CoinInfoAdapter(private val context: Context): RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    var coinInfoList: MutableList<CoinPriceInfo> = mutableListOf()
+    var coinInfoList: List<CoinPriceInfo> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()

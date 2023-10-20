@@ -32,10 +32,8 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
         val disposable = ApiFactory.apiService.getTopCoinsInfo(limit = 10)
 //        val disposable = ApiFactory.apiService.getFullPriceList( fSyms = "BTC,ETH,EOS")
             .map { it.data?.map {
-                println("RRRRRR   ${it.coinInfo?.name}")
                 it.coinInfo?.name }?.joinToString(",") }//  IT'S IMPORTANT TO DON'T ADD SPACE AFTER COMMA: ", " - IT WON'T WORK COS в адресной сроки идёт сплошной текст
             .flatMap {
-                println("HHHHH $it")
                 ApiFactory.apiService.getFullPriceList(fSyms = it) }
             .map { getPriceListFromRawData(it) }
             .delaySubscription(10, TimeUnit.SECONDS)
@@ -55,14 +53,10 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun getPriceListFromRawData(
         coinPriceInfoRowData: CoinPriceInfoRowData
-    )    : MutableList<CoinPriceInfo> {
+    )    : List<CoinPriceInfo> {
         val result = ArrayList<CoinPriceInfo>()
         val jsonObject = coinPriceInfoRowData.coinPriceInfoJsonObject ?: return result
-        println("FFFFF ${coinPriceInfoRowData.coinPriceInfoJsonObject.size()}")
         val coinKeySet = jsonObject.entrySet().map { it.key }.toMutableSet()
-        jsonObject.entrySet().forEach { println("EEEEE ${it.key}") }
-        for (coinKey in coinKeySet)
-            println("DDDDD $coinKey")
         for (coinKey in coinKeySet) {
             val currencyJson = jsonObject.getAsJsonObject(coinKey)
             val currencyKeySet = currencyJson.entrySet().map { it.key }.toMutableSet()

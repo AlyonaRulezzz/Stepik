@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CoinDetailActivity">
+
+    <ImageView
+        android:id="@+id/ivLogoCoin"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp"
+        tools:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/tvSymbols"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivLogoCoin"
+        android:layout_margin="20dp"
+        tools:text="BTC / USD"
+        android:textColor="#FF0B8DF4"
+        android:textSize="30sp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSymbols"
+        android:layout_margin="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvPriceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="20dp"
+                android:text="@string/tvPrice"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@id/tvPriceLabel"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="28543.59" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierUnderPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:barrierAllowsGoneWidgets="false"
+                app:constraint_referenced_ids="tvPriceLabel,tvPriceLabel"
+                />
+
+            <TextView
+                android:id="@+id/tvMinOfDayPriceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrierUnderPrice"
+                android:layout_margin="20dp"
+                android:text="@string/MinPerDay"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvMinOfDayPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="#FFE30505"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@id/tvMinOfDayPriceLabel"
+                app:layout_constraintTop_toBottomOf="@+id/barrierUnderPrice"
+                tools:text="28000.00" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierUnderMinOfDayPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:barrierAllowsGoneWidgets="false"
+                app:constraint_referenced_ids="tvMinOfDayPriceLabel,tvMinOfDayPrice"
+                />
+
+            <TextView
+                android:id="@+id/tvMaxOfDayPriceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrierUnderMinOfDayPrice"
+                android:layout_margin="20dp"
+                android:text="@string/MaxPerDay"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvMaxOfDayPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="#8BC34A"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@id/tvMaxOfDayPriceLabel"
+                app:layout_constraintTop_toBottomOf="@+id/barrierUnderMinOfDayPrice"
+                tools:text="28999.00" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierUnderMaxOfDayPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:barrierAllowsGoneWidgets="false"
+                app:constraint_referenced_ids="tvMaxOfDayPriceLabel,tvMaxOfDayPrice"
+                />
+
+            <TextView
+                android:id="@+id/tvLastDealLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrierUnderMaxOfDayPrice"
+                android:layout_margin="20dp"
+                android:text="@string/LastDeal"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvLastDeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@id/tvLastDealLabel"
+                app:layout_constraintTop_toBottomOf="@+id/barrierUnderMaxOfDayPrice"
+                tools:text="Bitfinex" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierUnderLastDeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:barrierAllowsGoneWidgets="false"
+                app:constraint_referenced_ids="tvLastDealLabel,tvLastDeal"
+                />
+
+            <TextView
+                android:id="@+id/tvLastUpdateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrierUnderLastDeal"
+                android:layout_margin="20dp"
+                android:text="@string/Updated"
+                android:textSize="15sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvLastUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@id/tvLastUpdateLabel"
+                app:layout_constraintTop_toBottomOf="@+id/barrierUnderLastDeal"
+                tools:text="21:05:58"/>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierUnderLastUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:barrierAllowsGoneWidgets="false"
+                app:constraint_referenced_ids="tvLastUpdateLabel,tvLastUpdate"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

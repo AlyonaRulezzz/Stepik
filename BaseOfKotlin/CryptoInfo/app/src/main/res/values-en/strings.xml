@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CryptoInfo</string>
+    <string name="last_update_template">Last update: %s</string>
+    <string name="tvPrice">Price:</string>
+    <string name="MinPerDay">Min per day:</string>
+    <string name="MaxPerDay">Max per day:</string>
+    <string name="Updated">Updated:</string>
+    <string name="LastDeal">Last market:</string>
+</resources>

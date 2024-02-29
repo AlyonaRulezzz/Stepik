@@ -2,4 +2,4 @@
 
 Реализация приложения для просмотра курса криптовалют с обновлением курса каждые 10 секунд.
 
-[cryptoinfo.webm](..%2F..%2F..%2F..%2Fcryptoinfo.webm)
+![cryptoinfo.gif](cryptoinfo.gif)
